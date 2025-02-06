@@ -35,7 +35,7 @@ Kener interpolates the data for missing intervals. For example, suppose if you h
 
 ## Triggers
 
-Triggers are the ones that are responsible for sending alerts when something goes wrong. They can be configured to send alerts to different channels like Email, Slack, Discord, Webhook etc.
+Triggers are the ones that are responsible for sending alerts when something goes wrong. They can be configured to send alerts to different channels like Email, Slack, Telegram, Discord, Webhook, etc.
 
 You can set multiple triggers of the same type.
 
@@ -48,6 +48,10 @@ Kener uses [resend.com](https://resend.com) to send emails. Please make sure to 
 ### Slack
 
 Slack Trigger is used to send a message to a slack channel when something goes wrong. It can be configured to send a message to different slack channels. Needs slack URL
+
+### Telegram
+
+Telegram Trigger is used to send a message to a telegram group or private chat when something goes wrong. It can be configured to send a message to different telegram chat IDs. Needs telegram bot token and chat ID
 
 ### Discord
 

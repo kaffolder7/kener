@@ -335,6 +335,12 @@
 							alt={trigger.trigger_type}
 							class="mr-2 inline-block h-6 w-6"
 						/>
+					{:else if trigger.trigger_type == "telegram"}
+						<img
+							src={base + "/telegram.svg"}
+							alt={trigger.trigger_type}
+							class="mr-2 inline-block h-6 w-6"
+						/>
 					{:else if trigger.trigger_type == "discord"}
 						<img
 							src={base + "/discord.svg"}
@@ -459,7 +465,16 @@
 						<img src="{base}/slack.svg" title="slack" class="mr-4 w-6" />
 						Slack
 					</Button>
-
+					<Button
+						variant={newTrigger.trigger_type != "telegram" ? "outline" : "secondary"}
+						class="border"
+						on:click={() => {
+							newTrigger.trigger_type = "telegram";
+						}}
+					>
+						<img src="{base}/telegram.svg" title="telegram" class="mr-4 w-6" />
+						Telegram
+					</Button>
 					<Button
 						variant={newTrigger.trigger_type != "email" ? "outline" : "secondary"}
 						class="border"
@@ -503,7 +518,7 @@
 							placeholder="Example: This is a trigger."
 						/>
 					</div>
-					{#if newTrigger.trigger_type != "email"}
+					{#if newTrigger.trigger_type != "email" && newTrigger.trigger_type != "telegram"}
 						<div class="mt-4 w-full">
 							<Label class="text-sm">
 								Add URL for your <span class="underline"
@@ -519,7 +534,58 @@
 							/>
 						</div>
 					{/if}
-					{#if newTrigger.trigger_type == "webhook"}
+					{#if newTrigger.trigger_type == "telegram"}
+						<div class="mt-4 w-full">
+							<div class="flex gap-x-2">
+								<div class="w-1/2">
+									<Label class="text-sm">
+										Bot Token
+										<span class="text-red-500">*</span>
+									</Label>
+									<Input
+										class="mt-2"
+										bind:value={newTrigger.trigger_meta.botToken}
+										placeholder="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
+									/>
+								</div>
+								<div class="w-1/2">
+									<Label class="text-sm">
+										Chat ID
+										<span class="text-red-500">*</span>
+									</Label>
+									<Input
+										class="mt-2"
+										bind:value={newTrigger.trigger_meta.chatId}
+										placeholder="123456789"
+									/>
+									<p class="my-2 text-xs text-muted-foreground">
+										Negative IDs (e.g. -XXXXXXXXX) indicate group chats, while positive IDs (e.g. XXXXXXXXX) are for private messages.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="mt-2 w-full">
+							<h4 class="mb-3">Setup Instructions</h4>
+							<p class="my-2 text-sm text-muted-foreground">To use this Telegram notification service, you'll need to:</p>
+							<ol class="my-2 ml-2 text-sm text-muted-foreground">
+								<li>1. Create a Telegram bot and get its token:
+									<ul class="ml-5 mb-2">
+										<li class="my-1">&bull; Chat with <a href="https://t.me/botfather" target="_blank" class="underline hover:text-primary transition-colors">@BotFather</a> on Telegram</li>
+										<li class="my-1">&bull; Use the <code class="bg-red-600/5 text-red-500/80 dark:bg-red-600/5 dark:text-red-400/70">/newbot</code> command and follow the instructions</li>
+										<li class="my-1">&bull; Save the bot token you receive</li>
+									</ul>
+								</li>
+								<li>2. Get the chat ID where you want to send messages:
+									<ul class="ml-5 mb-2">
+										<li class="my-1">&bull; Add your bot to a group or start a private chat with it</li>
+										<li class="my-1">&bull; Send a message to the chat</li>
+										<li class="my-1">&bull; Access this URL: <code class="select-all bg-red-600/5 text-red-500/80 dark:bg-red-600/5 dark:text-red-400/70">https://api.telegram.org/bot&lt;YourBotToken&gt;/getUpdates</code></li>
+										<li class="my-1">&bull; Look for the <code class="bg-red-600/5 text-red-500/80 dark:bg-red-600/5 dark:text-red-400/70">chat.id</code> in the response</li>
+									</ul>
+								</li>
+							</ol>
+						</div>
+					{:else if newTrigger.trigger_type == "webhook"}
 						<div class="mt-4 w-full">
 							<Label for="url">Add Optional Headers for Webhooks</Label>
 							<div class="mt-2 grid grid-cols-6 gap-2">

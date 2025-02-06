@@ -16,6 +16,7 @@ Currently, Kener supports the following alerting mechanisms:
 -   Webhook
 -   Discord
 -   Slack
+-   Telegram
 
 We are adding more alerting mechanisms in the future.
 
@@ -37,13 +38,19 @@ triggers:
   - name: Some Slack Channel
 	type: slack
     url: https://hooks.slack.com/services/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
+  - name: A Telegram Group
+	type: "telegram"
+	botToken: "1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
+	chatId: "-123456789"
 ```
 
 | Key  | Description                                                             |
 | ---- | ----------------------------------------------------------------------- |
 | name | Name of the alerting mechanism. This will be used in the monitor config |
-| type | Type of the alerting mechanism. Can be `webhook`, `discord`, `slack`    |
+| type | Type of the alerting mechanism. Can be `webhook`, `discord`, `slack`, `telegram`    |
 | url  | URL of the webhook or discord or slack channel                          |
+| botToken  | Telegram Bot Token                          |
+| chatId  | Telegram Chat ID                          |
 
 There may be additional keys based on the type of alerting mechanism.
 
@@ -120,6 +127,16 @@ The slack message when alert is `RESOLVED` will look like this
 
 ![Slack](/slack_resolved.png)
 
+### Telegram
+
+The telegram message when alert is `TRIGGERED` will look like this
+
+![Telegram](/telegram.png)
+
+The telegram message when alert is `RESOLVED` will look like this
+
+![Telegram](/telegram_resolved.png)
+
 ### Add Alerts to Monitors
 
 Once you have set up the triggers, you can add them to your monitors in the `config/monitors.yaml` file.
@@ -153,7 +170,7 @@ The `alerting` object lets you define the alerting mechanism for the monitor. It
 
 <div class="rounded border px-4 py-0 ">
 	<p class="text-sm font-medium">
-		It will send alerts to the webhook, discord, and slack channels.
+		It will send alerts to the webhook, discord, slack, and telegram channels.
 		The alert will be set when the monitor goes down for 1 health check.
     	There will be one more alert when the monitor is up again after, 1 health check is successful.
 	</p>

@@ -612,6 +612,12 @@
 											alt={trigger.trigger_type}
 											class="ml-2 inline-block h-4 w-4"
 										/>
+									{:else if trigger.trigger_type == "telegram"}
+										<img
+											src={base + "/telegram.svg"}
+											alt={trigger.trigger_type}
+											class="ml-2 inline-block h-4 w-4"
+										/>
 									{:else if trigger.trigger_type == "discord"}
 										<img
 											src={base + "/discord.svg"}

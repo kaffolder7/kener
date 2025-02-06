@@ -210,7 +210,7 @@ The below monitor will show DEGRADED if 3 or more degraded status in a day and D
 
 Make sure you have set up triggers in `server.yaml`. Read more about [alerts](/docs/alerting).
 
-The below example will trigger an alert if the monitor is DOWN for 10 consecutive times. It will also create an incident in Github and send alerts to Webhook, Discord and Slack. It will also trigger an alert if the monitor is DEGRADED for 5 consecutive times. It will not create an incident in Github and send alerts to Webhook, Discord and Slack.
+The below example will trigger an alert if the monitor is DOWN for 10 consecutive times. It will also create an incident in Github and send alerts to Webhook, Discord, Slack, and Telegram. It will also trigger an alert if the monitor is DEGRADED for 5 consecutive times. It will not create an incident in Github and send alerts to Webhook, Discord, Slack, and Telegram.
 
 ```yaml
 - name: Earth
@@ -228,6 +228,7 @@ The below example will trigger an alert if the monitor is DOWN for 10 consecutiv
               - Webhook MyWebhook
               - Discord Test
               - Slack Test
+              - Telegram Test
       DEGRADED:
           failureThreshold: 5
           successThreshold: 2
@@ -237,4 +238,5 @@ The below example will trigger an alert if the monitor is DOWN for 10 consecutiv
               - Webhook MyWebhook
               - Discord Test
               - Slack Test
+              - Telegram Test
 ```

@@ -30,6 +30,7 @@ Kener supports the following triggers:
 -   [Webhook](#webhook)
 -   [Discord](#discord)
 -   [Slack](#slack)
+-   [Telegram](#telegram)
 -   [Email](#email)
 
 ## Webhook
@@ -187,6 +188,55 @@ The slack message when alert is `RESOLVED` will look like this
 
 ![Slack](/slack_resolved.png)
 
+## Telegram
+
+Telegram triggers are used to send a message to a telegram group when a monitor goes down or up.
+
+<div class="border rounded-md">
+
+![Trigger API](/trig_3.png)
+
+</div>
+
+### Telegram Bot Token
+
+<span class="text-red-500 text-xs font-semibold">
+	REQUIRED
+</span>
+
+The bot token is a **unique authentication key** issued by Telegram when you create a bot using [@BotFather](https://t.me/BotFather). It is used to **authorize** and **authenticate** API requests to interact with Telegram's servers.
+
+#### Create a Telegram bot and get its token:
+
+1.  Chat with [@BotFather](https://t.me/BotFather) on Telegram
+2.  Use the `/newbot` command and follow the instructions
+3.  Save the bot token you receive
+
+### Telegram Chat ID
+
+<span class="text-red-500 text-xs font-semibold">
+	REQUIRED
+</span>
+
+The chat ID is a **unique identifier** for a Telegram user, group, or channel where the bot can send or receive messages. It allows the bot to target a specific conversation.
+
+#### How to get the Telegram Chat ID where you want to send messages:
+
+1.  Add your bot to a group or start a private chat with it
+2.  Send a message to the chat
+3.  Access this URL: `https://api.telegram.org/bot<YourBotToken>/getUpdates`
+4.  Look for the `chat.id` in the response
+
+#### Telegram Message
+
+The telegram message when alert is `TRIGGERED` will look like this
+
+![Telegram](/telegram.png)
+
+The telegram message when alert is `RESOLVED` will look like this
+
+![Telegram](/telegram_resolved.png)
+
 ## Email
 
 Email triggers are used to send an email when a monitor goes down or up. Kener supports sending emails via [resend](https://resend.com) or over SMTP.
@@ -248,13 +298,13 @@ Subject of the email when `RESOLVED`
 
 ### Body
 
-The emaik message when alert is `TRIGGERED` will look like this
+The email message when alert is `TRIGGERED` will look like this
 
-![Slack](/em_t.png)
+![Email](/em_t.png)
 
-The emaik message when alert is `RESOLVED` will look like this
+The email message when alert is `RESOLVED` will look like this
 
-![Slack](/em_r.png)
+![Email](/em_r.png)
 
 ---
 

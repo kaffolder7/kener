@@ -2,6 +2,7 @@
 import Webhook from "./webhook.js";
 import Discord from "./discord.js";
 import Slack from "./slack.js";
+import Telegram from "./telegram.js";
 import Email from "./email.js";
 
 class Notification {
@@ -15,6 +16,8 @@ class Notification {
 			this.client = new Discord(trigger_meta.url, siteData, monitorData);
 		} else if (trigger.trigger_type === "slack") {
 			this.client = new Slack(trigger_meta.url, siteData, monitorData);
+		} else if (trigger.trigger_type === "telegram") {
+			this.client = new Telegram(trigger_meta.botToken, trigger_meta.chatId, siteData, monitorData);
 		} else if (trigger.trigger_type === "email") {
 			this.client = new Email(trigger_meta, siteData, monitorData);
 		} else {
